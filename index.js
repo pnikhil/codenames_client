@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv/config')
 
+const { addUser, removeUser, getUser, getUsersInChannel, getAllUsers } = require('./users')
+const { newPuzzle, getPuzzle, checkPuzzle, removePuzzle, endTurn, guessWord, newGame, newMessage, selectWord } = require('./puzzle')
 
 const PORT = process.env.PORT || 5000;
 
