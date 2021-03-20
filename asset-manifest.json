@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/codenames_client/static/css/main.ea21fe09.chunk.css",
-    "main.js": "/codenames_client/static/js/main.0eba5628.chunk.js",
-    "main.js.map": "/codenames_client/static/js/main.0eba5628.chunk.js.map",
-    "runtime-main.js": "/codenames_client/static/js/runtime-main.117efb71.js",
-    "runtime-main.js.map": "/codenames_client/static/js/runtime-main.117efb71.js.map",
-    "static/js/2.6c24df87.chunk.js": "/codenames_client/static/js/2.6c24df87.chunk.js",
-    "static/js/2.6c24df87.chunk.js.map": "/codenames_client/static/js/2.6c24df87.chunk.js.map",
-    "index.html": "/codenames_client/index.html",
-    "precache-manifest.403464d569589807da3a595d1d7a7aac.js": "/codenames_client/precache-manifest.403464d569589807da3a595d1d7a7aac.js",
-    "service-worker.js": "/codenames_client/service-worker.js",
-    "static/css/main.ea21fe09.chunk.css.map": "/codenames_client/static/css/main.ea21fe09.chunk.css.map",
-    "static/js/2.6c24df87.chunk.js.LICENSE.txt": "/codenames_client/static/js/2.6c24df87.chunk.js.LICENSE.txt",
-    "static/media/trophie.svg": "/codenames_client/static/media/trophie.04073341.svg"
+    "main.css": "/static/css/main.ea21fe09.chunk.css",
+    "main.js": "/static/js/main.1b4d5d7d.chunk.js",
+    "main.js.map": "/static/js/main.1b4d5d7d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7f8a04c9.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7f8a04c9.js.map",
+    "static/js/2.75fc4720.chunk.js": "/static/js/2.75fc4720.chunk.js",
+    "static/js/2.75fc4720.chunk.js.map": "/static/js/2.75fc4720.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.5fd7efe4f6ae8005b9c795aece85fb88.js": "/precache-manifest.5fd7efe4f6ae8005b9c795aece85fb88.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.ea21fe09.chunk.css.map": "/static/css/main.ea21fe09.chunk.css.map",
+    "static/js/2.75fc4720.chunk.js.LICENSE.txt": "/static/js/2.75fc4720.chunk.js.LICENSE.txt",
+    "static/media/trophie.svg": "/static/media/trophie.04073341.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.117efb71.js",
-    "static/js/2.6c24df87.chunk.js",
+    "static/js/runtime-main.7f8a04c9.js",
+    "static/js/2.75fc4720.chunk.js",
     "static/css/main.ea21fe09.chunk.css",
-    "static/js/main.0eba5628.chunk.js"
+    "static/js/main.1b4d5d7d.chunk.js"
   ]
 }
