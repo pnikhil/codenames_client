@@ -1,7 +1,7 @@
 {
   "name": "codenames-client",
   "version": "0.1.0",
-  "homepage": "https://pnikhil.github.io/codenames_client",
+  "homepage": "https://scroid.com",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
