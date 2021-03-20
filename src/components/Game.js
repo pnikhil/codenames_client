@@ -18,7 +18,7 @@ import Popup from './Popup'
 
 
 let socket;
-const ENDPOINT = 'https://dry-eyrie-69778.herokuapp.com'
+const ENDPOINT = 'https://dry-eyrie-69778.herokuapp.com/'
 
 const switchProps = {
     onColor: '#009688',
