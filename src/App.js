@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom'
-import { HashRouter } from 'react-router-dom'
+import {HashRouter as Router, Route} from 'react-router-dom'
+//import { HashRouter as Router } from 'react-router-dom'
 import Join from './components/Join'
 import Game from './components/Game'
 import './css/App.css';
@@ -14,10 +14,10 @@ const App = () => {
           document.title = 'Codenames'
       }, []),
 
-      <HashRouter basename={'/'}>
+      <Router basename={'/'}>
         <Route path='/' exact component={Join} />
         <Route path='/play/:channel' component={Game} />
-      </HashRouter>
+      </Router>
   );
 
 }
