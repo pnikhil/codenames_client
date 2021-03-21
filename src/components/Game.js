@@ -11,7 +11,7 @@ import {TailSpin} from 'svg-loaders-react'
 import '../css/Popup.css';
 import '../css/Game.css';
 import '../css/Sidebar.css';
-import Trophie from '../img/trophie.svg'
+
 import {getSize} from '../utils/WindowSize'
 
 import Popup from './Popup'
@@ -106,7 +106,7 @@ const Game = ({location}) => {
 
     const newGame = (e) => {
         e.preventDefault();
-        setShowPopup(false)
+        setShowPopup(true)
         socket.emit('newGame')
     }
 
@@ -164,15 +164,12 @@ const Game = ({location}) => {
                     {puzzle.winner && showPopup &&
 
                     <Popup handleClose={() => setShowPopup(false)}>
-                        <img src={Trophie} alt='trophie' className="popup-image"/>
+                        {/*<img src={Trophie} alt='trophie' className="popup-image"/>*/}
                         <h2 className={puzzle.winner}>{puzzle.winner && puzzle.winner.toUpperCase()} team wins!</h2>
                         <p>{puzzle.black ? 'The assassin has been found' : 'All words found'}</p>
                         <Button text={'New Game'} onClick={newGame}/>
                     </Popup>
 
-                    }
-
-                    {puzzle.winner
                     }
 
                     {loading ?
