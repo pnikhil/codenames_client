@@ -14,10 +14,10 @@ const App = () => {
           document.title = 'Codenames'
       }, []),
 
-      <BrowserRouter basename={'/'}>
+      <Router basename={'/'}>
         <Route path='/' exact component={Join} />
         <Route path='/play/:channel' component={Game} />
-      </BrowserRouter>
+      </Router>
   );
 
 }
