@@ -25,7 +25,7 @@
     "svg-loaders-react": "^2.2.1"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "dev": "react-scripts start",
     "predeploy": "npm run build",
