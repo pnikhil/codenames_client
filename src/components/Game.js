@@ -11,6 +11,7 @@ import '../css/Popup.css';
 import '../css/Game.css';
 import '../css/Sidebar.css';
 import Popup from './Popup'
+import {toast} from "react-toastify";
 
 
 let socket;
@@ -108,7 +109,13 @@ const Game = ({location}) => {
     const newGame = (e) => {
         e.preventDefault();
         setShowPopup(true)
-        socket.emit('newGame')
+        socket.emit('newGame');
+
+        toast.info("New game started!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000,
+            closeOnClick: true
+        });
     }
 
     const selectWord = (word) => {
@@ -153,9 +160,9 @@ const Game = ({location}) => {
 
                         <div>
                             <div className={'sidebar-section'}>
-                                <Button text={'New game'} onClick={newGame} className='fullwidth outline'/>
 
-                                <a href='/'><Button className='fullwidth outline' onClick={exitChannel} text={'Leave Channel'}/></a>
+
+                                <a href='/'><Button className='fullwidth outline' onClick={exitChannel} text={'Quit Game'}/></a>
                             </div>
                         </div>
                     </div>
@@ -251,6 +258,8 @@ const Game = ({location}) => {
                                 <div className="center">
                                     <Button text={'End Turn'} onClick={endTurn}
                                             disabled={puzzle.winner}/>
+
+                                    <Button text={'New game'} onClick={newGame} />
                                 </div>
                             </div>
                         </div>

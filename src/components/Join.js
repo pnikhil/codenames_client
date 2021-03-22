@@ -19,7 +19,7 @@ const Join = () => {
     toast.configure();
 
     useEffect(() => {
-        sessionStorage.removeItem('game');
+        // sessionStorage.removeItem('game'); change later if required
         if (window.localStorage.getItem('channel-name') != null) {
             const channelName = window.localStorage.getItem('channel-name');
             setChannel(channelName);
