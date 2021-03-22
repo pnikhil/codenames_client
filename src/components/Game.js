@@ -5,15 +5,11 @@ import Navbar from './Navbar'
 import Button from './Button'
 import SidebarSection from './SidebarSection'
 import {useParams, Redirect} from 'react-router-dom'
-import {faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import Switch from "react-switch";
 import {TailSpin} from 'svg-loaders-react'
 import '../css/Popup.css';
 import '../css/Game.css';
 import '../css/Sidebar.css';
-
-import {getSize} from '../utils/WindowSize'
-
 import Popup from './Popup'
 
 

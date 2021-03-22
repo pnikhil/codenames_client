@@ -11,6 +11,7 @@
     "dotenv": "^8.2.0",
     "moment": "^2.25.3",
     "query-string": "^6.12.1",
+    "random-words": "1.1.1",
     "react": "^16.13.1",
     "react-confetti": "^5.0.1",
     "react-dom": "^16.13.1",
@@ -31,8 +32,6 @@
     "predeploy": "npm run build",
     "heroku-postbuild": "npm run build"
   },
-  
-  
   "eslintConfig": {
     "extends": [
       "react-app"

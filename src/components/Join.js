@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom'
 import Switch from "react-switch";
-
+import randomWords from 'random-words'
 import Button from './Button'
 import '../css/Forms.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCopy} from '@fortawesome/free-solid-svg-icons'
 
 const Join = () => {
+
 
     const [name, setName] = useState('')
     const [channel, setChannel] = useState('')
@@ -15,7 +18,6 @@ const Join = () => {
         if (!name || !channel) {
             e.preventDefault()
         } else {
-
             const game = {name, channel, spymaster}
             sessionStorage.setItem('game', JSON.stringify(game));
 
@@ -29,6 +31,10 @@ const Join = () => {
         activeBoxShadow: '0 0 0px 3px #1d1d32'
     }
 
+    const generateWord = () =>{
+        setChannel(randomWords({ exactly: 2, join: '-' }));
+    }
+
     return (
 
 
@@ -40,17 +46,17 @@ const Join = () => {
                 <div className={'form-wrapper'}>
                     <form onSubmit={handleSubmit} className="form">
 
-                        <input type="text" id='name-input' placeholder="Your Name" class="nameInput"
+                        <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
-                        <input type="text" id='channel-input' placeholder="Channel name" class="channelInput"
+                        <input type="text" id='channel-input' placeholder="Channel name" className="channelInput" value={channel}
                                onChange={(e) => setChannel(e.target.value)}/>
-
+                        <button type="button" className={'button-inner generate-button'} onClick={generateWord}>Generate Name</button>
+                        {channel.length > 2 ? <button type="button" className={'button-inner generate-button pull-right'} onClick={() => {navigator.clipboard.writeText(window.location.href + 'play/' + channel)}}>Copy URL<FontAwesomeIcon icon={faCopy} /></button> : ''}
                         <div className="form-row">
                             <label htmlFor='spymaster-switch'>Spymaster?</label>
                             <Switch id='spymaster-switch' onChange={(e) => setSpymaster(e)}
                                     checked={spymaster} {...switchProps}/>
                         </div>
-                        <div className='space'></div>
                         <Link onClick={handleSubmit} to={`/play/${channel}`}>
                             <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
                         </Link>
