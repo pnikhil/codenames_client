@@ -91,11 +91,11 @@
 }
 
 .card.hidden.red {
-    box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 14px var(--red-light);
+    box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 14px #FE5F55;
 }
 
 .card.hidden.blue {
-    box-shadow: inset 0 0 0 2px #fff,inset 0 0 0 14px var(--blue-dark);
+    box-shadow: inset 0 0 0 2px #fff,inset 0 0 0 14px #09c6f9;
 }
 
 .card.hidden.black {
@@ -103,13 +103,11 @@
 }
 
 .card.red {
-  background-image: linear-gradient(to top, var(--red-dark), var(--red-light));
-  background-color: var(--red-dark);
+  background-color: #FE5F55;
 }
 
 .card.blue {
-  background-color: var(--blue-dark);
-  background-image: linear-gradient(to top, var(--blue-dark), var(--blue-light));
+  background-color: #09c6f9;
 }
 
 .card.black {
@@ -124,7 +122,7 @@
 
 .card.neutral, .card.black, .card.blue, .card.red {
   color: white;
-  box-shadow: inset 0px 1px 1px rgba(255,255,255,.5);
+  /*box-shadow: inset 0px 1px 1px rgba(255,255,255,.5);*/
 }
 
 .card .confirm-selection {
