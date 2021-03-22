@@ -11,7 +11,7 @@ const App = () => {
   return (
 
       useEffect(() => {
-          document.title = 'Codenames'
+          document.title = 'Codenames - Play Multiplayer Game Online'
       }, []),
 
       <Router basename={'/'}>
