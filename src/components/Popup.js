@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Button from './Button'
 
 const Popup = ({children, handleClose}) => {
 
@@ -31,7 +30,7 @@ const Popup = ({children, handleClose}) => {
 		<div className={`popup-wrapper ${show ? 'active' : ''}`}>
 			 <div className={'popup'}>
 				<div className={'popup-inner'}>
-				<Button className="close-btn" onClick={handleHide} />
+				{/*<Button className="close-btn" onClick={handleHide} />*/}
 					{children}
 				</div>
 			</div>

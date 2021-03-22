@@ -11,6 +11,7 @@
   animation-duration: .5s;
 }
 
+
 #game {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -142,6 +143,7 @@
 .scores {
   text-align:center;
   line-height: 40px;
+  margin-top: 12px;
 }
 .scores .score {
   font-size: 120px;
@@ -205,7 +207,7 @@
 }
 
 .top-bar, .bottom-bar {
-    width: 100%;
+    /*width: 100%;*/
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: baseline;
@@ -268,7 +270,7 @@
   }
   
   .card {
-    padding:35px 0;
+    padding: 12px 0;
   }
 
   .card .confirm-selection {
@@ -301,10 +303,23 @@
 }
 
 @media only screen and (max-width: 768px) {
-  
+
+  .card {
+    padding: 10px 4px;
+    border-radius: 4px;
+    background-color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    /*box-shadow: 0 2px 5px rgba(0,0,0,0.05);*/
+    font-family: 'Montserrat', sans-serif;
+    color: #0b0d2d;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: default;
+  }
 
   #game {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     column-gap: 12px;
     row-gap: 12px;
     margin: 30px 0 30px;
@@ -385,7 +400,7 @@
 @media only screen and (max-width: 480px) {
   
   #game {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
     row-gap: 10px;
   }
@@ -394,5 +409,51 @@
     font-size: 11px;
   }
 
+}
+
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( .75 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( .75 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( .75 );
+  }
+  100%
+  {
+    transform: scale( .75 );
+  }
+}
+
+.heart{
+  color: red;
+  animation: heartbeat 2s infinite;
+}
+
+
+.footer {
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  width: 100%;
+  margin-top: 1%;
+  padding-bottom: 1rem;
+  font-size: 12px;
 }
 

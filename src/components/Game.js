@@ -5,15 +5,11 @@ import Navbar from './Navbar'
 import Button from './Button'
 import SidebarSection from './SidebarSection'
 import {useParams, Redirect} from 'react-router-dom'
-import {faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import Switch from "react-switch";
 import {TailSpin} from 'svg-loaders-react'
 import '../css/Popup.css';
 import '../css/Game.css';
 import '../css/Sidebar.css';
-import Trophie from '../img/trophie.svg'
-import {getSize} from '../utils/WindowSize'
-
 import Popup from './Popup'
 
 
@@ -106,7 +102,7 @@ const Game = ({location}) => {
 
     const newGame = (e) => {
         e.preventDefault();
-        setShowPopup(false)
+        setShowPopup(true)
         socket.emit('newGame')
     }
 
@@ -164,15 +160,12 @@ const Game = ({location}) => {
                     {puzzle.winner && showPopup &&
 
                     <Popup handleClose={() => setShowPopup(false)}>
-                        <img src={Trophie} alt='trophie' className="popup-image"/>
+                        {/*<img src={Trophie} alt='trophie' className="popup-image"/>*/}
                         <h2 className={puzzle.winner}>{puzzle.winner && puzzle.winner.toUpperCase()} team wins!</h2>
                         <p>{puzzle.black ? 'The assassin has been found' : 'All words found'}</p>
                         <Button text={'New Game'} onClick={newGame}/>
                     </Popup>
 
-                    }
-
-                    {puzzle.winner
                     }
 
                     {loading ?
@@ -188,7 +181,7 @@ const Game = ({location}) => {
 						</span>
                                     }
 
-                                <span className="currentTurn timer">Timer</span>
+                                {/*<span className="currentTurn timer">Timer</span>*/}
                                 {puzzle.points && <div className="scores scoreBackground">
 
                                     <svg xmlns="http://www.w3.org/2000/svg">

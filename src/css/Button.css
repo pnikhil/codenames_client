@@ -21,10 +21,14 @@
   margin-bottom:10px;
 }
 
+.pull-right{
+    float: right;
+}
+
+
 .button-inner {
-    background: -webkit-gradient(linear, left top, left bottom, from(#FF0000), to(#990000));
-    background: linear-gradient(#FF0000, #990000);
-  padding: 25px 45px;
+    background: #FE5F55;
+  padding: 20px 45px;
   color: #fff;
   text-transform: uppercase;
   display: inline-block;
@@ -37,8 +41,14 @@
     border: none;
   margin: 0;
   cursor: pointer;
+}
 
 
+
+.generate-button{
+    padding: 3px 7px !important;
+    letter-spacing: 0px !important;
+    font-size: 11px !important;
 }
 
 .button-inner:focus {
@@ -46,11 +56,11 @@
 }
 
 .button-inner:hover {
-  background-image: linear-gradient(to top,  #FF0000, #990000);
+    filter: brightness(85%);
 }
 
 .button-inner:active {
-  background-image: linear-gradient(to top,  #FF0000, #990000);
+    filter: brightness(85%);
 }
 
 .button-inner svg {
@@ -70,7 +80,7 @@
 }
 
 .button-outer.outline {
-  box-shadow: inset 1px 1px 0px 0px #ffffff22, inset 0px 0px 0px 5px #eb3349;
+  box-shadow: inset 1px 1px 0px 0px #ffffff22, inset 0px 0px 0px 5px #FE5F55;
 }
 
 .button-outer.outline .button-inner {
@@ -83,7 +93,7 @@
 }
 
 .button-outer.outline:hover {
-  background-color: #eb3349;
+  background-color: #FE5F55;
 }
 
 .close-btn {
@@ -129,9 +139,10 @@
 }
 
 .button-outer.disabled .button-inner {
-    background-color: #1d2350;
-    background-image: none;
-    color: #909090;
+    /*background-color: #1d2350;*/
+    /*background-image: none;*/
+    /*color: #909090;*/
+    filter: brightness(55%);
     text-shadow: none;
     box-shadow: none;
     cursor: default;
