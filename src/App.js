@@ -13,7 +13,7 @@ const App = () => {
       <Router basename={'/'}>
           <Switch>
         <Route path='/' exact component={Join} />
-        <Route path='/play/:channel' exact component={Game} />
+        <Route path='/channel/:channel' exact component={Game} />
           <Route path="*" component={NotFoundPage} />
               </Switch>
         <Footer />
