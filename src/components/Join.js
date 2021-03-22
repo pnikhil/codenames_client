@@ -15,10 +15,10 @@ const Join = () => {
     const [name, setName] = useState('')
     const [channel, setChannel] = useState('')
     const [spymaster, setSpymaster] = useState(false)
-    const [team, setTeam] = useState('blue')
     toast.configure();
 
     useEffect(() => {
+        // sessionStorage.removeItem('game'); change later if required
         if (window.localStorage.getItem('channel-name') != null) {
             const channelName = window.localStorage.getItem('channel-name');
             setChannel(channelName);
@@ -30,15 +30,19 @@ const Join = () => {
                 closeOnClick: true
             });
         }
-    });
+    }, []);
 
     const handleSubmit = (e) => {
         if (!name || !channel) {
-            e.preventDefault()
+            e.preventDefault();
+            toast.error("Fill in your name and select a channel!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 5000,
+                closeOnClick: true
+            });
         } else {
             const game = {name, channel, spymaster}
             sessionStorage.setItem('game', JSON.stringify(game));
-
             return null
         }
     }
@@ -54,7 +58,30 @@ const Join = () => {
     };
 
     const copyUrl = () => {
-        navigator.clipboard.writeText(window.location.href + 'play/' + channel);
+        const urlToCopy = window.location.href + 'play/' + channel;
+        if (navigator.clipboard && window.isSecureContext) {
+            // navigator clipboard api method'
+            navigator.clipboard.writeText(urlToCopy);
+        }
+
+        else {
+            // text area method
+            let textArea = document.createElement("textarea");
+            textArea.value = urlToCopy;
+            // make the textarea out of viewport
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                // here the magic happens
+                document.execCommand('copy') ? res() : rej();
+                textArea.remove();
+            });
+        }
+
         toast.info("URL copied. You can now share it with your friends.", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
@@ -67,21 +94,23 @@ const Join = () => {
         <div className="page-container">
             <div>
                 <div className="title">
-                    <h4>Codenames</h4>
+                    <h4><span className={'redText'}>Code</span><span className={'blueText'}>names</span></h4>
                 </div>
                 <div className={'form-wrapper'}>
                     <form onSubmit={handleSubmit} className="form">
 
                         <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
-                        <input type="text" id='channel-input' placeholder="Channel name OR generate below" className="channelInput"
-                               value={channel}
-                               onChange={(e) => setChannel(e.target.value)}/>
-                        <button type="button" className={'button-inner generate-button'} onClick={generateWord}>Generate Channel
-                        </button>
-                        {channel.length > 2 ?
-                            <button type="button" className={'button-inner generate-button pull-right'}
-                                    onClick={copyUrl}>Copy URL<FontAwesomeIcon icon={faCopy}/></button> : ''}
+                        <div class={'channel-grp'}><input type="text" id='channel-input' placeholder="CHANNEL NAME"
+                                                          className="channelInput"
+                                                          value={channel}
+                                                          onChange={(e) => setChannel(e.target.value)}/>
+                            <button type="button" className={'button-inner generate-button'}
+                                    onClick={generateWord}>Generate
+                            </button>
+                        </div>
+
+
                         <div className="form-row">
                             <label htmlFor='spymaster-switch'>Spymaster?</label>
                             <Switch
@@ -112,9 +141,15 @@ const Join = () => {
                         {/*        className="react-switch" id='team-switch' onChange={(e) => setTeam(e)}*/}
                         {/*        checked={spymaster} {...switchProps}/>*/}
                         {/*</div>*/}
+
                         <Link onClick={handleSubmit} to={`/play/${channel}`}>
                             <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
                         </Link>
+
+                        {channel.length > 3 ?
+                            <div class={'copy-div'}><button type="button" className={'button-inner copy-btn'}
+                                    onClick={copyUrl}>Copy URL<FontAwesomeIcon icon={faCopy}/></button></div> : ''}
+
                     </form>
                 </div>
             </div>

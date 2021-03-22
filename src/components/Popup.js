@@ -9,13 +9,6 @@ const Popup = ({children, handleClose}) => {
 		setShow(true)
 	}, [])
 
-	// useEffect( () => {
-	// 	if(show) {
-	// 		document.body.className = 'modal-open';
-	// 		window.scrollTo(0, 0);
-	// 	} 
-	// }, [show])
-
 	const handleHide = () => {
 		setShow(false);
 		setTimeout(function(){ 
@@ -37,11 +30,7 @@ const Popup = ({children, handleClose}) => {
 			<div className={'background'} onClick={handleHide}></div>
 		</div>
 
-
-
 		)
 }
 
-
-
-export default Popup
+export default Popup;

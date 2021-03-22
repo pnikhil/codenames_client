@@ -80,7 +80,7 @@
     background-color: var(--blue2-light);
 }
 
-.card.hidden.red, .card.hidden.blue, .card.hidden.neutral, .card.hidden.black {
+.card.hidden.red, .card.hidden.blue,.card.hidden.black {
     background-image:none;
     background-color:white;
     color:#000;
@@ -91,11 +91,18 @@
 }
 
 .card.hidden.red {
-    box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 14px #FE5F55;
+color: var(--red-light);
+  background-color: white;
 }
 
 .card.hidden.blue {
-    box-shadow: inset 0 0 0 2px #fff,inset 0 0 0 14px #09c6f9;
+  color: var(--blue-light);
+  background-color: white;
+}
+
+.card.hidden.neutral{
+color: var(--neutral-dark);
+  background-color: white;
 }
 
 .card.hidden.black {
@@ -103,11 +110,11 @@
 }
 
 .card.red {
-  background-color: #FE5F55;
+  background-color: var(--red-light);
 }
 
 .card.blue {
-  background-color: #09c6f9;
+  background-color: var(--blue-light);
 }
 
 .card.black {
@@ -116,8 +123,7 @@
 }
 
 .card.neutral {
-  background-color: #67d1e0;
-  background-image: linear-gradient(to top, var(--neutral-dark), var(--neutral-light));
+  background-color: var(--neutral-dark);
 }
 
 .card.neutral, .card.black, .card.blue, .card.red {
@@ -455,3 +461,6 @@
   font-size: 12px;
 }
 
+/*.game-btn{*/
+/*  padding: 20px 30px !important;*/
+/*}*/

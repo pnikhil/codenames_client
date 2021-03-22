@@ -11,7 +11,7 @@
   --blue-light: #09c6f9;
   --red-dark: #FE5F55;
   --red-light: #FE5F55;
-  --neutral-dark: #78909c;
+  --neutral-dark: #86888A;
   --neutral-light: #90a4ae;
 
   --blue2-dark: #90caf9;
@@ -42,11 +42,6 @@ body.modal-open {
   justify-content: space-between;
   /*padding: 5% 0 30px;*/
 }
-
-.title{
-  text-transform: uppercase;
-}
-
 
 
 .space {
