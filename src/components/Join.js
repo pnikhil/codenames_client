@@ -58,7 +58,30 @@ const Join = () => {
     };
 
     const copyUrl = () => {
-        navigator.clipboard.writeText(window.location.href + 'play/' + channel);
+        const urlToCopy = window.location.href + 'play/' + channel;
+        if (navigator.clipboard && window.isSecureContext) {
+            // navigator clipboard api method'
+            navigator.clipboard.writeText(urlToCopy);
+        }
+
+        else {
+            // text area method
+            let textArea = document.createElement("textarea");
+            textArea.value = urlToCopy;
+            // make the textarea out of viewport
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                // here the magic happens
+                document.execCommand('copy') ? res() : rej();
+                textArea.remove();
+            });
+        }
+
         toast.info("URL copied. You can now share it with your friends.", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
