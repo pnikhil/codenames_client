@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 
 import Join from './components/Join'
