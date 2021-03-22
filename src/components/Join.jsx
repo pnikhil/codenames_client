@@ -58,7 +58,7 @@ const Join = () => {
     };
 
     const copyUrl = () => {
-        const urlToCopy = window.location.href + 'play/' + channel;
+        const urlToCopy = window.location.href + 'channel/' + channel;
         if (navigator.clipboard && window.isSecureContext) {
             // navigator clipboard api method'
             navigator.clipboard.writeText(urlToCopy);
@@ -142,7 +142,7 @@ const Join = () => {
                         {/*        checked={spymaster} {...switchProps}/>*/}
                         {/*</div>*/}
 
-                        <Link onClick={handleSubmit} to={`/play/${channel}`}>
+                        <Link onClick={handleSubmit} to={`/channel/${channel}`}>
                             <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
                         </Link>
 
