@@ -256,9 +256,7 @@ const Game = ({location}) => {
                                 </div>
 
                                 <div className="center">
-                                    <Button text={'End Turn'} onClick={endTurn}
-                                            disabled={puzzle.winner}/>
-
+                                    <Button text={'End Turn'} onClick={endTurn} disabled={puzzle.winner}/>
                                     <Button text={'New game'} onClick={newGame} />
                                 </div>
                             </div>
