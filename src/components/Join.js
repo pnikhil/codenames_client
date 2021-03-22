@@ -15,7 +15,7 @@ const Join = () => {
     const [name, setName] = useState('')
     const [channel, setChannel] = useState('')
     const [spymaster, setSpymaster] = useState(false)
-    const [team, setTeam] = useState('blue')
+    const [cteam, setTeam] = useState('blue')
     toast.configure();
 
     useEffect(() => {
