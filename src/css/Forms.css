@@ -12,7 +12,6 @@
     max-width: 370px;
     margin: 0 auto 100px;
     padding: 30px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius:5px;
     z-index: 1;
 }
@@ -25,12 +24,15 @@
 
 
 .title {
-	max-width:600px;
+	max-width:370px;
+    border-radius: 5px;
 	width:100%;
 	margin:auto;
 	text-align: center;
 	font-size:50px;
-	color:#fff;
+	color:#ffffff;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.15);
     /*padding: 30px 0 60px; */
 }
 
@@ -111,3 +113,16 @@
     background-color: var(--blue-light) !important;
     letter-spacing: 0px !important;
 }
+
+.redText{
+    color: var(--red-light);
+}
+
+.blueText{
+    color: var(--blue-light);
+}
+
+h4{
+    margin-bottom: 10px;
+}
+

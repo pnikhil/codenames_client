@@ -35,7 +35,12 @@ const Join = () => {
 
     const handleSubmit = (e) => {
         if (!name || !channel) {
-            e.preventDefault()
+            e.preventDefault();
+            toast.error("Fill in your name and select a channel!", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 5000,
+                closeOnClick: true
+            });
         } else {
             const game = {name, channel, spymaster}
             sessionStorage.setItem('game', JSON.stringify(game));
@@ -67,7 +72,7 @@ const Join = () => {
         <div className="page-container">
             <div>
                 <div className="title">
-                    <h4>Codenames</h4>
+                    <h4><span className={'redText'}>Code</span><span className={'blueText'}>names</span></h4>
                 </div>
                 <div className={'form-wrapper'}>
                     <form onSubmit={handleSubmit} className="form">
