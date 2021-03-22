@@ -49,17 +49,17 @@ const newPuzzle = async (channel) => {
 
 }
 
-const newMessage = (channel, message, type) => {
-
-    const puzzle = getPuzzle(channel)
-
-    if(puzzle) {
-        const text = {text: message, time: Date.now(), type: type}
-        puzzle.messages.push(text)
-        return puzzle
-    }
-
-}
+// const newMessage = (channel, message, type) => {
+//
+//     const puzzle = getPuzzle(channel)
+//
+//     if(puzzle) {
+//         const text = {text: message, time: Date.now(), type: type}
+//         puzzle.messages.push(text)
+//         return puzzle
+//     }
+//
+// }
 
 const getPuzzle = (channel) => puzzles.find((puzzle) => puzzle.channel === channel.trim().toLowerCase() )
 
@@ -104,7 +104,7 @@ const selectWord = (channel, word, name) => {
 
     if(puzzle) {
         puzzle.selected = word
-        newMessage(channel, `${name} selected the word '${word.toUpperCase()}'`, 'game')
+        //newMessage(channel, `${name} selected the word '${word.toUpperCase()}'`, 'game')
         return puzzle
     }
 
@@ -120,7 +120,7 @@ const guessWord = (channel, word, name) => {
         const color = puzzle.key[index]
         puzzle.words[index].color = color;
 
-        newMessage(channel, `${name} confirmed '${word.toUpperCase()}'`, 'game')
+        //newMessage(channel, `${name} confirmed '${word.toUpperCase()}'`, 'game')
 
         switch(color) {
             case 'black':
@@ -131,15 +131,15 @@ const guessWord = (channel, word, name) => {
             case otherTeam(puzzle.currentTurn):
                 endTurn(channel)
                 puzzle.points[puzzle.currentTurn] -= 1;
-                newMessage(channel, `Wrong! '${word.toUpperCase()}' is for the ${color} team`, 'game')
+                //newMessage(channel, `Wrong! '${word.toUpperCase()}' is for the ${color} team`, 'game')
                 break;
             case 'neutral':
                 endTurn(channel)
-                newMessage(channel, `Wrong! '${word.toUpperCase()}' is a neutral word`, 'game')
+                //newMessage(channel, `Wrong! '${word.toUpperCase()}' is a neutral word`, 'game')
                 break;
             default:
                 puzzle.points[puzzle.currentTurn] -= 1;
-                newMessage(channel, `Correct! '${word.toUpperCase()}' is for the ${color} team`, 'game')
+                //newMessage(channel, `Correct! '${word.toUpperCase()}' is for the ${color} team`, 'game')
         }
 
         if(puzzle.points[puzzle.currentTurn] === 0) {
@@ -155,4 +155,4 @@ const guessWord = (channel, word, name) => {
 }
 
 
-module.exports = { checkPuzzle, newPuzzle, getPuzzle, getAllPuzzles, removePuzzle, endTurn, guessWord, newGame, newMessage, selectWord};
+module.exports = { checkPuzzle, newPuzzle, getPuzzle, getAllPuzzles, removePuzzle, endTurn, guessWord, newGame, selectWord};

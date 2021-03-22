@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv/config')
 
 const { addUser, removeUser, getUser, getUsersInChannel, getAllUsers } = require('./users')
-const { newPuzzle, getPuzzle, checkPuzzle, removePuzzle, endTurn, guessWord, newGame, newMessage, selectWord } = require('./puzzle')
+const { newPuzzle, getPuzzle, checkPuzzle, removePuzzle, endTurn, guessWord, newGame, selectWord } = require('./puzzle')
 
 const PORT = process.env.PORT || 5000;
 
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 
         io.to(user.channel).emit('onlineUsers', {channel: user.channel, users: getUsersInChannel(user.channel)})
         io.to(user.channel).emit('getPuzzle', getPuzzle(channel) )
-        io.to(user.channel).emit('getPuzzle', newMessage(channel, `${user.name} has joined the channel ${user.channel}`))
+        //io.to(user.channel).emit('getPuzzle', newMessage(channel, `${user.name} has joined the channel ${user.channel}`))
 
         callback({name:user.name, spymaster:user.spymaster});
     })
@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
             if(UsersInChannel.length === 0) {
                 removePuzzle(user.channel)
             }
-            io.to(user.channel).emit('getPuzzle', newMessage(user.channel, `${user.name} has left the Channel`))
+            //io.to(user.channel).emit('getPuzzle', newMessage(user.channel, `${user.name} has left the Channel`))
             io.to(user.channel).emit('onlineUsers', {channel: user.channel, users: UsersInChannel})
         }
     });
