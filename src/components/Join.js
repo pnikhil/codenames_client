@@ -19,6 +19,7 @@ const Join = () => {
     toast.configure();
 
     useEffect(() => {
+        sessionStorage.removeItem('game');
         if (window.localStorage.getItem('channel-name') != null) {
             const channelName = window.localStorage.getItem('channel-name');
             setChannel(channelName);
@@ -38,7 +39,6 @@ const Join = () => {
         } else {
             const game = {name, channel, spymaster}
             sessionStorage.setItem('game', JSON.stringify(game));
-
             return null
         }
     }
@@ -74,14 +74,16 @@ const Join = () => {
 
                         <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
-                        <input type="text" id='channel-input' placeholder="Channel name OR generate below" className="channelInput"
-                               value={channel}
-                               onChange={(e) => setChannel(e.target.value)}/>
-                        <button type="button" className={'button-inner generate-button'} onClick={generateWord}>Generate Channel
-                        </button>
-                        {channel.length > 2 ?
-                            <button type="button" className={'button-inner generate-button pull-right'}
-                                    onClick={copyUrl}>Copy URL<FontAwesomeIcon icon={faCopy}/></button> : ''}
+                        <div class={'channel-grp'}><input type="text" id='channel-input' placeholder="CHANNEL NAME"
+                                                          className="channelInput"
+                                                          value={channel}
+                                                          onChange={(e) => setChannel(e.target.value)}/>
+                            <button type="button" className={'button-inner generate-button'}
+                                    onClick={generateWord}>Generate
+                            </button>
+                        </div>
+
+
                         <div className="form-row">
                             <label htmlFor='spymaster-switch'>Spymaster?</label>
                             <Switch
@@ -112,9 +114,15 @@ const Join = () => {
                         {/*        className="react-switch" id='team-switch' onChange={(e) => setTeam(e)}*/}
                         {/*        checked={spymaster} {...switchProps}/>*/}
                         {/*</div>*/}
+
                         <Link onClick={handleSubmit} to={`/play/${channel}`}>
                             <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
                         </Link>
+
+                        {channel.length > 3 ?
+                            <div class={'copy-div'}><button type="button" className={'button-inner copy-btn'}
+                                    onClick={copyUrl}>Copy URL<FontAwesomeIcon icon={faCopy}/></button></div> : ''}
+
                     </form>
                 </div>
             </div>
