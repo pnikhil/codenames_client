@@ -9,11 +9,6 @@ import './css/Button.css';
 const App = () => {
 
   return (
-
-      useEffect(() => {
-          document.title = 'Codenames - Play Multiplayer Game Online'
-      }, []),
-
       <Router basename={'/'}>
         <Route path='/' exact component={Join} />
         <Route path='/play/:channel' component={Game} />
