@@ -15,6 +15,7 @@ const Join = () => {
     const [name, setName] = useState('')
     const [channel, setChannel] = useState('')
     const [spymaster, setSpymaster] = useState(false)
+    const [team, setTeam] = useState('blue')
     toast.configure();
 
     useEffect(() => {
@@ -49,12 +50,12 @@ const Join = () => {
     };
 
     const generateWord = () => {
-        setChannel(randomWords({exactly: 2, join: '-'}));
+        setChannel(randomWords({exactly: 2, maxLength: 5, join: '-'}));
     };
 
     const copyUrl = () => {
         navigator.clipboard.writeText(window.location.href + 'play/' + channel);
-        toast.info("URL copied to the clipboard!", {
+        toast.info("URL copied. You can now share it with your friends.", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
             closeOnClick: true
@@ -73,11 +74,10 @@ const Join = () => {
 
                         <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
-                        <input type="text" id='channel-input' placeholder="Channel name" className="channelInput"
+                        <input type="text" id='channel-input' placeholder="Channel name OR generate below" className="channelInput"
                                value={channel}
                                onChange={(e) => setChannel(e.target.value)}/>
-                        <button type="button" className={'button-inner generate-button'} onClick={generateWord}>Generate
-                            Name
+                        <button type="button" className={'button-inner generate-button'} onClick={generateWord}>Generate Channel
                         </button>
                         {channel.length > 2 ?
                             <button type="button" className={'button-inner generate-button pull-right'}
@@ -97,6 +97,21 @@ const Join = () => {
                                 className="react-switch" id='spymaster-switch' onChange={(e) => setSpymaster(e)}
                                 checked={spymaster} {...switchProps}/>
                         </div>
+                        {/*<div className="form-row">*/}
+                        {/*    <label htmlFor='team-switch'>Team</label>*/}
+                        {/*    <Switch*/}
+                        {/*        onColor="#86d3ff"*/}
+                        {/*        onHandleColor="#2693e6"*/}
+                        {/*        handleDiameter={30}*/}
+                        {/*        uncheckedIcon={false}*/}
+                        {/*        checkedIcon={false}*/}
+                        {/*        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"*/}
+                        {/*        activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"*/}
+                        {/*        height={20}*/}
+                        {/*        width={48}*/}
+                        {/*        className="react-switch" id='team-switch' onChange={(e) => setTeam(e)}*/}
+                        {/*        checked={spymaster} {...switchProps}/>*/}
+                        {/*</div>*/}
                         <Link onClick={handleSubmit} to={`/play/${channel}`}>
                             <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
                         </Link>

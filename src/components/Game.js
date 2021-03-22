@@ -142,8 +142,8 @@ const Game = ({location}) => {
                     <div className="sidebar-content">
                         <h1 className="sidebar-section">CODENAMES</h1>
 
-                        <SidebarSection title='Channel Name' variant='space-between'>
-                            {channel}
+                        <SidebarSection title='Channel' variant='space-between'>
+                            <h3>{channel}</h3>
                         </SidebarSection>
 
                         <SidebarSection title='Online players' className='online-users' scroll>
@@ -169,7 +169,6 @@ const Game = ({location}) => {
                     {puzzle.winner && showPopup &&
 
                     <Popup handleClose={() => setShowPopup(false)}>
-                        {/*<img src={Trophie} alt='trophie' className="popup-image"/>*/}
                         <h2 className={puzzle.winner}>{puzzle.winner && puzzle.winner.toUpperCase()} team wins!</h2>
                         <p>{puzzle.black ? 'The assassin has been found' : 'All words found'}</p>
                         <Button text={'New Game'} onClick={newGame}/>
@@ -197,12 +196,12 @@ const Game = ({location}) => {
 
                                         <defs>
                                             <linearGradient id="redGradient" x1="0" x2="0" y1="0" y2="1">
-                                                <stop offset="0" stopColor='#FF0000'/>
-                                                <stop offset="100%" stopColor="#990000"/>
+
+                                                <stop offset="100%" stopColor="#FE5F55"/>
                                             </linearGradient>
                                             <linearGradient id="blueGradient" x1="0" x2="0" y1="0" y2="1">
-                                                <stop offset="0%" stopColor='#009FFD'/>
-                                                <stop offset="100%" stopColor='#37D5D6'/>
+
+                                                <stop offset="100%" stopColor='#09c6f9'/>
                                             </linearGradient>
                                         </defs>
 

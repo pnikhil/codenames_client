@@ -1,5 +1,5 @@
 .form-wrapper {
-    width: 360px;
+    width: 450px;
     margin: auto;
     position: relative;
 }
@@ -9,7 +9,7 @@
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    max-width: 360px;
+    max-width: 450px;
     margin: 0 auto 100px;
     padding: 45px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -47,7 +47,7 @@
 }
 
 .form-wrapper .form input, .form-wrapper .form textarea {
-    font-family: "Roboto", sans-serif;
+    /*font-family: "Roboto", sans-serif;*/
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -55,7 +55,7 @@
     margin: 0 0 15px;
     padding: 20px 20px;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 5px;
 }
 
