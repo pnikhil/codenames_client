@@ -80,7 +80,7 @@
     background-color: var(--blue2-light);
 }
 
-.card.hidden.red, .card.hidden.blue, .card.hidden.neutral, .card.hidden.black {
+.card.hidden.red, .card.hidden.blue,.card.hidden.black {
     background-image:none;
     background-color:white;
     color:#000;
@@ -91,13 +91,18 @@
 }
 
 .card.hidden.red {
-background-color: var(--red-light);
-  filter: brightness(60%);
+color: var(--red-light);
+  background-color: white;
 }
 
 .card.hidden.blue {
-background-color: var(--blue-light);
-  filter: brightness(50%);
+  color: var(--blue-light);
+  background-color: white;
+}
+
+.card.hidden.neutral{
+color: var(--neutral-dark);
+  background-color: white;
 }
 
 .card.hidden.black {

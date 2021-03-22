@@ -15,7 +15,6 @@ const Join = () => {
     const [name, setName] = useState('')
     const [channel, setChannel] = useState('')
     const [spymaster, setSpymaster] = useState(false)
-    const [cteam, setTeam] = useState('blue')
     toast.configure();
 
     useEffect(() => {
@@ -31,7 +30,7 @@ const Join = () => {
                 closeOnClick: true
             });
         }
-    });
+    }, []);
 
     const handleSubmit = (e) => {
         if (!name || !channel) {
