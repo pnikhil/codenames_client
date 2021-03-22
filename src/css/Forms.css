@@ -1,5 +1,5 @@
 .form-wrapper {
-    width: 450px;
+    width: 400px;
     margin: auto;
     position: relative;
 }
@@ -9,7 +9,7 @@
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    max-width: 450px;
+    max-width: 400px;
     margin: 0 auto 100px;
     padding: 45px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -95,7 +95,7 @@
 }
 
 .generate-button{
-    padding: 20px 25px !important;
+    padding: 20px 15px!important;
     letter-spacing: 0px !important;
     font-size: 15px !important;
     display: inline-block;
