@@ -35,14 +35,17 @@ const Game = ({location}) => {
     const [showPopup, setShowPopup] = useState(true)
     //SETUP SOCKET
     useEffect(() => {
-        if (channel !== null && user.length === 0) {
-            window.localStorage.setItem('channel-name', channel);
-        }
+
+
 
         const game = JSON.parse(sessionStorage.getItem('game'));
 
         if (!game) {
-            setError(true)
+            if (channel !== null) {
+                window.localStorage.setItem('channel-name', channel);
+            }
+
+            setError(true);
             return
         }
 
@@ -120,6 +123,10 @@ const Game = ({location}) => {
         return <Redirect to='/'/>
     }
 
+    const exitChannel = () =>{
+
+        this.props.history.replace({ pathname: `/`})
+    };
 
     return (
 
@@ -148,7 +155,7 @@ const Game = ({location}) => {
                             <div className={'sidebar-section'}>
                                 <Button text={'New game'} onClick={newGame} className='fullwidth outline'/>
 
-                                <a href='/'><Button className='fullwidth outline' text={'Leave Channel'}/></a>
+                                <a href='/'><Button className='fullwidth outline' onClick={exitChannel} text={'Leave Channel'}/></a>
                             </div>
                         </div>
                     </div>
@@ -246,7 +253,6 @@ const Game = ({location}) => {
                                     <Button text={'End Turn'} onClick={endTurn}
                                             disabled={puzzle.winner}/>
                                 </div>
-                                <div></div>
                             </div>
                         </div>
                     }
