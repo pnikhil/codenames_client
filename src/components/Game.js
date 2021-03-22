@@ -17,11 +17,10 @@ let socket;
 const ENDPOINT = 'https://dry-eyrie-69778.herokuapp.com/'
 
 const switchProps = {
-    onColor: '#009688',
-    offColor: '#ff0000',
-    activeBoxShadow: '0 0 0px 3px #1d1d32',
-    boxShadow: '0 0 5px 3px #1d1d3233',
-}
+    onColor: '#86d3ff',
+    offColor: '#ccc',
+    activeBoxShadow: '0 0 0px 3px #1d1d32'
+};
 
 const Game = ({location}) => {
 
@@ -36,6 +35,9 @@ const Game = ({location}) => {
     const [showPopup, setShowPopup] = useState(true)
     //SETUP SOCKET
     useEffect(() => {
+        if (channel !== null && user.length === 0) {
+            window.localStorage.setItem('channel-name', channel);
+        }
 
         const game = JSON.parse(sessionStorage.getItem('game'));
 
@@ -224,7 +226,16 @@ const Game = ({location}) => {
                                     {user.spymaster &&
                                     <div className="setting">
                                         <label htmlFor="spymaster-switch">Spymaster view</label>
-                                        <Switch id='spymaster-switch' onChange={(e) => setSpymasterView(e)}
+                                        <Switch onColor="#86d3ff"
+                                                onHandleColor="#2693e6"
+                                                handleDiameter={30}
+                                                uncheckedIcon={false}
+                                                checkedIcon={false}
+                                                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                                                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                                                height={20}
+                                                width={48}
+                                                className="react-switch" id='spymaster-switch' onChange={(e) => setSpymasterView(e)}
                                                 checked={spymasterView} {...switchProps} disabled={puzzle.winner}/>
                                     </div>
                                     }
