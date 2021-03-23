@@ -4,6 +4,7 @@ import Switch from "react-switch";
 import randomWords from 'random-words'
 import Button from './Button'
 import '../css/Forms.css';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCopy} from '@fortawesome/free-solid-svg-icons'
 import {toast} from 'react-toastify';
@@ -93,8 +94,26 @@ const Join = () => {
 
         <div className="page-container">
             <div>
-                <div className="title">
-                    <h4><span className={'redText'}>Code</span><span className={'blueText'}>names</span></h4>
+                {/*<div className="title">*/}
+                {/*    <h4><span className={'redText'}>Code</span><span className={'blueText'}>names</span></h4>*/}
+                {/*</div>*/}
+                <div className="logo">
+                <svg xmlns="http://www.w3.org/2000/svg">
+
+                    <defs>
+                        <linearGradient id="redGradient" x1="0" x2="0" y1="0" y2="1">
+
+                            <stop offset="100%" stopColor="#FE5F55"/>
+                        </linearGradient>
+                        <linearGradient id="blueGradient" x1="0" x2="0" y1="0" y2="1">
+
+                            <stop offset="100%" stopColor='#09c6f9'/>
+                        </linearGradient>
+                    </defs>
+                    <text className={`logoText red red-text`} x="23%" y="94%">CODE</text>
+                    <text className={`logoText blue`} x="71%" y="94%">NAMES</text>
+
+                </svg>
                 </div>
                 <div className={'form-wrapper'}>
                     <form onSubmit={handleSubmit} className="form">
