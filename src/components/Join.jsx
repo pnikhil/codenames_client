@@ -1,30 +1,28 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import Switch from "react-switch";
-import randomWords from 'random-words'
 import Button from './Button'
-import '../css/Forms.css';
-
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCopy} from '@fortawesome/free-solid-svg-icons'
 import {toast} from 'react-toastify';
+import randomWords from 'random-words'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faShareSquare} from "@fortawesome/free-solid-svg-icons/faShareSquare";
+import '../css/Forms.css';
 import 'react-toastify/dist/ReactToastify.min.css';
-
 
 const Join = () => {
     //alert(window.location.href);
     const [name, setName] = useState('')
     const [channel, setChannel] = useState('')
+    const [isDisabledButton, setIsDisabledButton] = useState(false)
     const [spymaster, setSpymaster] = useState(false)
     toast.configure();
-
     useEffect(() => {
         // sessionStorage.removeItem('game'); change later if required
         if (window.localStorage.getItem('channel-name') != null) {
             const channelName = window.localStorage.getItem('channel-name');
             setChannel(channelName);
+            setIsDisabledButton(true);
             window.localStorage.removeItem('channel-name');
-
             toast.success("Channel name copied from URL. Enter your name and hit Play!", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 5000,
@@ -47,6 +45,7 @@ const Join = () => {
             return null
         }
     }
+
 
     const switchProps = {
         onColor: '#86d3ff',
@@ -83,11 +82,12 @@ const Join = () => {
             });
         }
 
-        toast.info("URL copied. You can now share it with your friends.", {
+        toast.info("URL copied. You can now share it with your friends to invite them.", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
             closeOnClick: true
         });
+
     };
 
     return (
@@ -117,19 +117,20 @@ const Join = () => {
                 </div>
                 <div className={'form-wrapper'}>
                     <form onSubmit={handleSubmit} className="form">
-
                         <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
                         <div className={'channel-grp'}><input type="text" id='channel-input' placeholder="CHANNEL NAME"
                                                           className="channelInput"
                                                           value={channel}
-                                                          onChange={(e) => setChannel(e.target.value)}/>
-                            <button type="button" className={'button-inner generate-button'}
+                                                          onChange={(e) => setChannel(e.target.value)} disabled={isDisabledButton}/>
+                            <button type="button" disabled={isDisabledButton} className={'button-inner generate-button'}
                                     onClick={generateWord}>Generate
                             </button>
                         </div>
 
-
+                        {channel.length > 3 ?
+                            <div className={'copy-div'}><button type="button" className={`button-inner copy-btn ${isDisabledButton? 'hideButton' : ''}`}
+                                                                onClick={copyUrl}>Invite Friends<FontAwesomeIcon icon={faShareSquare}/></button></div> : ''}
                         <div className="form-row">
                             <label htmlFor='spymaster-switch'>Spymaster?</label>
                             <Switch
@@ -145,30 +146,10 @@ const Join = () => {
                                 className="react-switch" id='spymaster-switch' onChange={(e) => setSpymaster(e)}
                                 checked={spymaster} {...switchProps}/>
                         </div>
-                        {/*<div className="form-row">*/}
-                        {/*    <label htmlFor='team-switch'>Team</label>*/}
-                        {/*    <Switch*/}
-                        {/*        onColor="#86d3ff"*/}
-                        {/*        onHandleColor="#2693e6"*/}
-                        {/*        handleDiameter={30}*/}
-                        {/*        uncheckedIcon={false}*/}
-                        {/*        checkedIcon={false}*/}
-                        {/*        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"*/}
-                        {/*        activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"*/}
-                        {/*        height={20}*/}
-                        {/*        width={48}*/}
-                        {/*        className="react-switch" id='team-switch' onChange={(e) => setTeam(e)}*/}
-                        {/*        checked={spymaster} {...switchProps}/>*/}
-                        {/*</div>*/}
 
                         <Link onClick={handleSubmit} to={`/channel/${channel}`}>
                             <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
                         </Link>
-
-                        {channel.length > 3 ?
-                            <div className={'copy-div'}><button type="button" className={'button-inner copy-btn'}
-                                    onClick={copyUrl}>Copy URL<FontAwesomeIcon icon={faCopy}/></button></div> : ''}
-
                     </form>
                 </div>
             </div>

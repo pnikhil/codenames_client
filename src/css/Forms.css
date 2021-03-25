@@ -158,3 +158,12 @@ h4{
 .logo text.logoText.blue {
     fill:url(#blueGradient);
 }
+
+button:disabled,
+button[disabled]{
+    filter: brightness(150%);
+}
+
+.hideButton{
+    display: none !important;
+}

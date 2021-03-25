@@ -12,6 +12,7 @@ import '../css/Game.css';
 import '../css/Sidebar.css';
 import Popup from './Popup'
 import {toast} from "react-toastify";
+import {faSignOutAlt, faShareAlt} from '@fortawesome/free-solid-svg-icons'
 
 
 let socket;
@@ -24,7 +25,6 @@ const switchProps = {
 };
 
 const Game = ({location}) => {
-
     let {channel} = useParams();
     const [puzzle, setPuzzle] = useState({})
     const [user, setUser] = useState('')
@@ -34,70 +34,96 @@ const Game = ({location}) => {
     const [showSidebar, setShowSidebar] = useState(false)
     const [spymasterView, setSpymasterView] =  useState(false)
     const [showPopup, setShowPopup] = useState(true)
+    const [timer, setTimer] = useState('');
+
+    toast.configure();
+    const copyUrl = () => {
+
+        const urlToCopy = window.location.href;
+        if (navigator.clipboard && window.isSecureContext) {
+            // navigator clipboard api method'
+            navigator.clipboard.writeText(urlToCopy);
+        }
+
+        else {
+            // text area method
+            let textArea = document.createElement("textarea");
+            textArea.value = urlToCopy;
+            // make the textarea out of viewport
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            return new Promise((res, rej) => {
+                // here the magic happens
+                document.execCommand('copy') ? res() : rej();
+                textArea.remove();
+            });
+        }
+
+        toast.info("URL copied. You can now share it with your friends to invite them.", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000,
+            closeOnClick: true
+        });
+    };
+
+
     //SETUP SOCKET
     useEffect(() => {
-
-
-
         const game = JSON.parse(sessionStorage.getItem('game'));
-
         if (!game) {
             if (channel !== null) {
                 window.localStorage.setItem('channel-name', channel);
             }
-
             setError(true);
             return
         }
 
-
         if (game) {
-
             const {name, spymaster} = game;
-
             socket = io(ENDPOINT);
             socket.emit('join', {name, channel, spymaster}, (response) => {
                 if (response.error) {
                     setError(true)
                 } else {
                     setUser(response)
+                    if (spymaster) {
+                        setSpymasterView(true);
+                    }
+                    socket.on("getTimer", (timer) => {
+                        setTimer(timer);
+                    });
                 }
-
             });
-
             return () => {
                 socket.emit('disconnect');
                 socket.off();
             }
-
         } else {
             setError(true)
         }
-
 
     }, [location.search, channel])
 
     //HANDLING ONLINE USERS
     useEffect(() => {
-
         if (socket) {
             socket.on("onlineUsers", ({users}) => {
                 setUsers(users);
             });
         }
-
     }, [users])
 
-
     useEffect(() => {
-
         if (socket) {
             socket.on("getPuzzle", (puzzle) => {
                 setPuzzle(puzzle);
                 setLoading(false)
             });
         }
-
     }, [])
 
 
@@ -119,19 +145,15 @@ const Game = ({location}) => {
     }
 
     const selectWord = (word) => {
-
         if (!puzzle.winner) {
                 socket.emit('guessWord', word);
         }
     }
 
-
     if (error) {
         return <Redirect to='/'/>
     }
-
     const exitChannel = () =>{
-
         this.props.history.replace({ pathname: `/`})
     };
 
@@ -160,9 +182,8 @@ const Game = ({location}) => {
 
                         <div>
                             <div className={'sidebar-section'}>
-
-
-                                <a href='/'><Button className='fullwidth outline' onClick={exitChannel} text={'Quit Game'}/></a>
+                                <Button className='fullwidth outline' onClick={copyUrl} text={'Invite Friends'} icon={faShareAlt}/>
+                                <a href='/'><Button className='fullwidth outline' onClick={exitChannel} text={'Quit Game'} icon={faSignOutAlt}/></a>
                             </div>
                         </div>
                     </div>
@@ -214,7 +235,7 @@ const Game = ({location}) => {
 
 
                                         <text className={`score red red-text`} x="20%" y="94%">{puzzle.points.red}</text>
-                                        <text className={`score neutral`} x="50%" y="94%">-</text>
+                                        <text className={`score `} x="50%" y="94%">/</text>
                                         <text className={`score blue`} x="80%" y="94%">{puzzle.points.blue}</text>
                                     </svg>
                                 </div>
