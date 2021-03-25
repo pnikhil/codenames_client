@@ -106,7 +106,7 @@ color: var(--neutral-dark);
 }
 
 .card.hidden.black {
-    box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 14px #333;
+    box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 7px #333;
 }
 
 .card.red {

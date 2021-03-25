@@ -120,7 +120,7 @@ const Join = () => {
 
                         <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
-                        <div class={'channel-grp'}><input type="text" id='channel-input' placeholder="CHANNEL NAME"
+                        <div className={'channel-grp'}><input type="text" id='channel-input' placeholder="CHANNEL NAME"
                                                           className="channelInput"
                                                           value={channel}
                                                           onChange={(e) => setChannel(e.target.value)}/>
@@ -166,7 +166,7 @@ const Join = () => {
                         </Link>
 
                         {channel.length > 3 ?
-                            <div class={'copy-div'}><button type="button" className={'button-inner copy-btn'}
+                            <div className={'copy-div'}><button type="button" className={'button-inner copy-btn'}
                                     onClick={copyUrl}>Copy URL<FontAwesomeIcon icon={faCopy}/></button></div> : ''}
 
                     </form>

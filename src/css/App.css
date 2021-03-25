@@ -27,8 +27,27 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background:linear-gradient(-120deg, #2A5470, #4C4177);
-  overflow-x: hidden;
+  background: linear-gradient(45deg, #5837ab, #2A5470, #8c2747);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 18s ease infinite;
+  -moz-animation: gradient 18s ease infinite;
+  animation: gradient 18s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+  0%{background-position:0% 66%}
+  50%{background-position:100% 35%}
+  100%{background-position:0% 66%}
+}
+@-moz-keyframes gradient {
+  0%{background-position:0% 66%}
+  50%{background-position:100% 35%}
+  100%{background-position:0% 66%}
+}
+@keyframes gradient {
+  0%{background-position:0% 66%}
+  50%{background-position:100% 35%}
+  100%{background-position:0% 66%}
 }
 
 body.modal-open {
