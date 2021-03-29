@@ -16,7 +16,7 @@ import {faSignOutAlt, faShareAlt} from '@fortawesome/free-solid-svg-icons'
 
 
 let socket;
-const ENDPOINT = 'https://dry-eyrie-69778.herokuapp.com/'
+const ENDPOINT = 'https://codenames-server-56jlb.ondigitalocean.app/'
 
 const switchProps = {
     onColor: '#86d3ff',
