@@ -145,7 +145,6 @@ color: var(--neutral-dark);
 }
 
 .scores {
-  text-align:center;
   line-height: 40px;
   margin-top: 12px;
 }
@@ -215,6 +214,7 @@ color: var(--neutral-dark);
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: baseline;
+    text-align: center;
 }
 
 .top-bar > div, .bottom-bar > div {
@@ -240,7 +240,7 @@ color: var(--neutral-dark);
 }
 
 .currentTurn {
-    padding: 15px 30px;
+    padding: 5px 10px;
     font-size: 30px;
     border-radius: 4px;
     color: #fff;
@@ -459,6 +459,14 @@ color: var(--neutral-dark);
   margin-top: 1%;
   padding-bottom: 1rem;
   font-size: 12px;
+  cursor: default;
+}
+
+.footer a{
+  text-decoration: none;
+}
+.footer a:visited{
+  color: white;
 }
 
 /*.game-btn{*/
