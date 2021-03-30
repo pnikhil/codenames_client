@@ -87,11 +87,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.channelInput{
+.roomInput{
     width: 60% !important;
 }
 
-.channel-grp{
+.room-grp{
     display: inline-block;
     width: 100%;
 }

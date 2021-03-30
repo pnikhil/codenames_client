@@ -12,18 +12,18 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const Join = () => {
     //alert(window.location.href);
     const [name, setName] = useState('')
-    const [channel, setChannel] = useState('')
+    const [room, setRoom] = useState('')
     const [isDisabledButton, setIsDisabledButton] = useState(false)
     const [spymaster, setSpymaster] = useState(false)
     toast.configure();
     useEffect(() => {
         // sessionStorage.removeItem('game'); change later if required
-        if (window.localStorage.getItem('channel-name') != null) {
-            const channelName = window.localStorage.getItem('channel-name');
-            setChannel(channelName);
+        if (window.localStorage.getItem('room-name') != null) {
+            const roomName = window.localStorage.getItem('room-name');
+            setRoom(roomName);
             setIsDisabledButton(true);
-            window.localStorage.removeItem('channel-name');
-            toast.success("Channel name copied from URL. Enter your name and hit Play!", {
+            window.localStorage.removeItem('room-name');
+            toast.success("Room name copied from URL. Enter your name and hit Play!", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 5000,
                 closeOnClick: true
@@ -32,15 +32,15 @@ const Join = () => {
     }, []);
 
     const handleSubmit = (e) => {
-        if (!name || !channel) {
+        if (!name || !room) {
             e.preventDefault();
-            toast.error("Fill in your name and select a channel!", {
+            toast.error("Fill in your name and select a room!", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 5000,
                 closeOnClick: true
             });
         } else {
-            const game = {name, channel, spymaster}
+            const game = {name, room, spymaster}
             sessionStorage.setItem('game', JSON.stringify(game));
             return null
         }
@@ -54,11 +54,11 @@ const Join = () => {
     };
 
     const generateWord = () => {
-        setChannel(randomWords({exactly: 2, maxLength: 5, join: '-'}));
+        setRoom(randomWords({exactly: 2, maxLength: 5, join: '-'}));
     };
 
     const copyUrl = () => {
-        const urlToCopy = window.location.href + 'channel/' + channel;
+        const urlToCopy = window.location.href + 'room/' + room;
         if (navigator.clipboard && window.isSecureContext) {
             // navigator clipboard api method'
             navigator.clipboard.writeText(urlToCopy);
@@ -82,9 +82,9 @@ const Join = () => {
             });
         }
 
-        toast.info("URL copied. You can now share it with your friends to invite them.", {
+        toast.info("URL copied. You can now share it with your friends to invite them to your room.", {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: 2000,
+            autoClose: 4000,
             closeOnClick: true
         });
 
@@ -119,16 +119,16 @@ const Join = () => {
                     <form onSubmit={handleSubmit} className="form">
                         <input type="text" id='name-input' placeholder="Your Name" className="nameInput"
                                onChange={(e) => setName(e.target.value)}/>
-                        <div className={'channel-grp'}><input type="text" id='channel-input' placeholder="CHANNEL NAME"
-                                                          className="channelInput"
-                                                          value={channel}
-                                                          onChange={(e) => setChannel(e.target.value)} disabled={isDisabledButton}/>
+                        <div className={'room-grp'}><input type="text" id='room-input' placeholder="ROOM NAME"
+                                                          className="roomInput"
+                                                          value={room}
+                                                          onChange={(e) => setRoom(e.target.value)} disabled={isDisabledButton}/>
                             <button type="button" disabled={isDisabledButton} className={'button-inner generate-button'}
                                     onClick={generateWord}>Generate
                             </button>
                         </div>
 
-                        {channel.length > 3 ?
+                        {room.length > 3 ?
                             <div className={'copy-div'}><button type="button" className={`button-inner copy-btn ${isDisabledButton? 'hideButton' : ''}`}
                                                                 onClick={copyUrl}>Invite Friends<FontAwesomeIcon icon={faShareSquare}/></button></div> : ''}
                         <div className="form-row">
@@ -147,8 +147,8 @@ const Join = () => {
                                 checked={spymaster} {...switchProps}/>
                         </div>
 
-                        <Link onClick={handleSubmit} to={`/channel/${channel}`}>
-                            <Button submit={name && channel} className="fullwidth" text={'Play!'}/>
+                        <Link onClick={handleSubmit} to={`/room/${room}`}>
+                            <Button submit={name && room} className="fullwidth" text={'Play!'}/>
                         </Link>
                     </form>
                 </div>

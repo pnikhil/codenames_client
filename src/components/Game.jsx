@@ -25,7 +25,7 @@ const switchProps = {
 };
 
 const Game = ({location}) => {
-    let {channel} = useParams();
+    let {room} = useParams();
     const [puzzle, setPuzzle] = useState({})
     const [user, setUser] = useState('')
     const [users, setUsers] = useState([]);
@@ -63,9 +63,9 @@ const Game = ({location}) => {
             });
         }
 
-        toast.info("URL copied. You can now share it with your friends to invite them.", {
+        toast.info("URL copied. You can now share it with your friends to invite them to your room.", {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: 2000,
+            autoClose: 4000,
             closeOnClick: true
         });
     };
@@ -75,8 +75,8 @@ const Game = ({location}) => {
     useEffect(() => {
         const game = JSON.parse(sessionStorage.getItem('game'));
         if (!game) {
-            if (channel !== null) {
-                window.localStorage.setItem('channel-name', channel);
+            if (room !== null) {
+                window.localStorage.setItem('room-name', room);
             }
             setError(true);
             return
@@ -85,7 +85,7 @@ const Game = ({location}) => {
         if (game) {
             const {name, spymaster} = game;
             socket = io(ENDPOINT);
-            socket.emit('join', {name, channel, spymaster}, (response) => {
+            socket.emit('join', {name, room, spymaster}, (response) => {
                 if (response.error) {
                     setError(true)
                 } else {
@@ -106,7 +106,7 @@ const Game = ({location}) => {
             setError(true)
         }
 
-    }, [location.search, channel])
+    }, [location.search, room])
 
     //HANDLING ONLINE USERS
     useEffect(() => {
@@ -153,7 +153,7 @@ const Game = ({location}) => {
     if (error) {
         return <Redirect to='/'/>
     }
-    const exitChannel = () =>{
+    const exitRoom = () =>{
         this.props.history.replace({ pathname: `/`})
     };
 
@@ -171,8 +171,8 @@ const Game = ({location}) => {
                     <div className="sidebar-content">
                         <h1 className="sidebar-section">CODENAMES</h1>
 
-                        <SidebarSection title='Channel' variant='space-between'>
-                            <h3>{channel}</h3>
+                        <SidebarSection title='Room' variant='space-between'>
+                            <h3>{room}</h3>
                         </SidebarSection>
 
                         <SidebarSection title='Online players' className='online-users' scroll>
@@ -183,7 +183,7 @@ const Game = ({location}) => {
                         <div>
                             <div className={'sidebar-section'}>
                                 <Button className='fullwidth outline' onClick={copyUrl} text={'Invite Friends'} icon={faShareAlt}/>
-                                <a href='/'><Button className='fullwidth outline' onClick={exitChannel} text={'Quit Game'} icon={faSignOutAlt}/></a>
+                                <a href='/'><Button className='fullwidth outline' onClick={exitRoom} text={'Quit Game'} icon={faSignOutAlt}/></a>
                             </div>
                         </div>
                     </div>
