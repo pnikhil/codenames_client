@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv/config')
 
-const { addUser, removeUser, getUser, getUsersInChannel, getAllUsers } = require('./users')
+const { addUser, removeUser, getUser, getUsersInRoom, getAllUsers } = require('./users')
 const { newPuzzle, getPuzzle, checkPuzzle, removePuzzle, endTurn, guessWord, newGame, selectWord } = require('./puzzle')
 
 const PORT = process.env.PORT || 5000;
@@ -25,44 +25,77 @@ const io = socketio(server);
 io.on('connection', (socket) => {
     console.log('We have a new connection!');
 
-    socket.on('join', async ({name, channel, spymaster}, callback) => {
+    socket.on('join', async ({name, room, spymaster}, callback) => {
 
-        const { error, user } = addUser({id:socket.id, name, channel, spymaster});
-        const puzzle = await checkPuzzle(channel)
+        const { error, user } = addUser({id:socket.id, name, room, spymaster});
+        const puzzle = await checkPuzzle(room)
 
         if(error) return callback({error})
 
-        socket.join(user.channel);
+        socket.join(user.room);
 
         // console.log('puzzle',puzzle)
         // console.log( 'all users: ', getAllUsers() )
-
-        io.to(user.channel).emit('onlineUsers', {channel: user.channel, users: getUsersInChannel(user.channel)})
-        io.to(user.channel).emit('getPuzzle', getPuzzle(channel) )
-        //io.to(user.channel).emit('getPuzzle', newMessage(channel, `${user.name} has joined the channel ${user.channel}`))
+        let usersInRoom = getUsersInRoom(user.room)
+        io.to(user.room).emit('onlineUsers', {room: user.room, users: usersInRoom})
+        io.to(user.room).emit('getPuzzle', getPuzzle(room) )
+        // if (usersInRoom.length >= 2){
+        //     console.log("Inside here");
+        //     io.to(user.channel).emit('getTimer', beingCountDownTimer(user));
+        // }
 
         callback({name:user.name, spymaster:user.spymaster});
     })
 
+/*    let timer, timerCount;
+    function beingCountDownTimer(user, game){
+        if (timer)
+            return
+            timerCount = 10;
+            timer = setInterval(function() {
+                io.to(user.channel).emit('getTimer', timerCount);
+                timerCount--;
+                console.log('timer count: ' + timerCount);
+                if (timerCount <= -1) {
+                    console.log('stopping timer.');
+                    clearInterval(timer);
+                    io.to(user.channel).emit('getPuzzle', endTurn(user.channel) )
+                    resetTimer();
+                }
+            }, 1000);
+    }*/
+
+/*    function resetTimer(){
+        timer = null;
+        clearInterval(timer);
+        timerCount = 10;
+    }*/
+
     socket.on('endTurn', (prop) => {
         const user = getUser(socket.id);
-        io.to(user.channel).emit('getPuzzle', endTurn(user.channel) )
+        io.to(user.room).emit('getPuzzle', endTurn(user.room) )
+/*        resetTimer();
+        beingCountDownTimer(user);*/
     })
 
     socket.on('newGame', async (prop) => {
         const user = getUser(socket.id);
-        const game = await newGame(user.channel)
-        io.to(user.channel).emit('getPuzzle', game )
-    })
+        const game = await newGame(user.room)
+        io.to(user.room).emit('getPuzzle', game)
+/*        resetTimer();
+        beingCountDownTimer(user, game);*/
+
+    });
 
     socket.on('selectWord', (word) => {
         const user = getUser(socket.id);
-        io.to(user.channel).emit('getPuzzle', selectWord(user.channel, word, user.name) )
+        console.log(user);
+        io.to(user.room).emit('getPuzzle', selectWord(user.room, word, user.name) )
     })
 
     socket.on('guessWord', (word) => {
         const user = getUser(socket.id);
-        io.to(user.channel).emit('getPuzzle', guessWord(user.channel, word, user.name) )
+        io.to(user.room).emit('getPuzzle', guessWord(user.room, word, user.name) )
     })
 
     socket.on('disconnect', () => {
@@ -70,12 +103,12 @@ io.on('connection', (socket) => {
         const user = removeUser(socket.id);
 
         if(user) {
-            const UsersInChannel = getUsersInChannel(user.channel);
-            if(UsersInChannel.length === 0) {
-                removePuzzle(user.channel)
+            const UsersInRoom = getUsersInRoom(user.room);
+            if(UsersInRoom.length === 0) {
+                removePuzzle(user.room)
             }
             //io.to(user.channel).emit('getPuzzle', newMessage(user.channel, `${user.name} has left the Channel`))
-            io.to(user.channel).emit('onlineUsers', {channel: user.channel, users: UsersInChannel})
+            io.to(user.room).emit('onlineUsers', {room: user.room, users: UsersInRoom})
         }
     });
 });

@@ -4,29 +4,29 @@ const sf= require("./util.js")
 
 let puzzles = [];
 
-const checkPuzzle = async (channel) => {
+const checkPuzzle = async (room) => {
 
-    if(!channel) return
-    channel = channel.trim().toLowerCase();
+    if(!room) return
+    room = room.trim().toLowerCase();
 
-    const existingPuzzle = getPuzzle(channel)
+    const existingPuzzle = getPuzzle(room)
     if(existingPuzzle) return {puzzle: existingPuzzle}
 
-    const puzzle = await newPuzzle(channel)
+    const puzzle = await newPuzzle(room)
 
     return puzzle
 
 }
 
-const newGame = async (channel) => {
-    removePuzzle(channel);
-    const puzzle = await newPuzzle(channel)
+const newGame = async (room) => {
+    removePuzzle(room);
+    const puzzle = await newPuzzle(room)
     return puzzle
 }
 
-const newPuzzle = async (channel) => {
+const newPuzzle = async (room) => {
 
-    channel = channel.trim().toLowerCase();
+    room = room.trim().toLowerCase();
 
     const response = fs.readFileSync('./data.json', 'utf8');
     const allWordsList = JSON.parse(response).words;
@@ -35,7 +35,7 @@ const newPuzzle = async (channel) => {
     const key = generateKey();
 
     const puzzle = {
-        channel: channel,
+        room: room,
         words: wordsArray,
         key: key.value,
         currentTurn: key.starts,
@@ -61,10 +61,10 @@ const newPuzzle = async (channel) => {
 //
 // }
 
-const getPuzzle = (channel) => puzzles.find((puzzle) => puzzle.channel === channel.trim().toLowerCase() )
+const getPuzzle = (room) => puzzles.find((puzzle) => puzzle.room === room.trim().toLowerCase() )
 
-const removePuzzle = (channel) => {
-    const index = puzzles.findIndex((puzzle) => puzzle.channel === channel.trim().toLowerCase());
+const removePuzzle = (room) => {
+    const index = puzzles.findIndex((puzzle) => puzzle.room === room.trim().toLowerCase());
     if(index !== -1) return puzzles.splice(index, 1)[0];
 }
 
@@ -88,8 +88,8 @@ const otherTeam = (team) => {
     return team === 'red' ? 'blue' : 'red'
 }
 
-const endTurn = channel => {
-    const puzzle = getPuzzle(channel)
+const endTurn = room => {
+    const puzzle = getPuzzle(room)
 
     if(puzzle) {
         puzzle.currentTurn = otherTeam(puzzle.currentTurn);
@@ -98,9 +98,9 @@ const endTurn = channel => {
 
 }
 
-const selectWord = (channel, word, name) => {
+const selectWord = (room, word, name) => {
 
-    const puzzle = getPuzzle(channel)
+    const puzzle = getPuzzle(room)
 
     if(puzzle) {
         puzzle.selected = word
@@ -110,9 +110,9 @@ const selectWord = (channel, word, name) => {
 
 }
 
-const guessWord = (channel, word, name) => {
+const guessWord = (room, word, name) => {
 
-    const puzzle = getPuzzle(channel)
+    const puzzle = getPuzzle(room)
 
     if(puzzle) {
 
@@ -124,17 +124,17 @@ const guessWord = (channel, word, name) => {
 
         switch(color) {
             case 'black':
-                endTurn(channel)
+                endTurn(room)
                 puzzle.winner = puzzle.currentTurn;
                 puzzle.black = true;
                 break;
             case otherTeam(puzzle.currentTurn):
-                endTurn(channel)
+                endTurn(room)
                 puzzle.points[puzzle.currentTurn] -= 1;
                 //newMessage(channel, `Wrong! '${word.toUpperCase()}' is for the ${color} team`, 'game')
                 break;
             case 'neutral':
-                endTurn(channel)
+                endTurn(room)
                 //newMessage(channel, `Wrong! '${word.toUpperCase()}' is a neutral word`, 'game')
                 break;
             default:

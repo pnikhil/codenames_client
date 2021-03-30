@@ -1,33 +1,33 @@
 const users = [];
 
-const addUser = ({ id, name, channel, spymaster}) => {
+const addUser = ({ id, name, room, spymaster}) => {
 
-    channel = channel.trim().toLowerCase();
+    room = room.trim().toLowerCase();
 
     if(!name) {
-        name = guestUser(channel)
+        name = guestUser(room)
     } else {
         name = name.trim().toLowerCase();
     }
 
-    const existingUser = users.find((user) => user.channel === channel && user.name === name);
+    const existingUser = users.find((user) => user.room === room && user.name === name);
 
-    if(!name || !channel) return { error: 'Username and channel are required.' };
+    if(!name || !room) return { error: 'Username and room are required.' };
     if(existingUser) return { error: 'Username is taken.' };
 
-    const user = { id, name, channel, spymaster };
+    const user = { id, name, room, spymaster };
 
     users.push(user);
 
     return { user };
 }
 
-const guestUser = (channel) => {
+const guestUser = (room) => {
 
-    const usersInChannel = getUsersInChannel(channel)
+    const usersInRoom = getUsersInRoom(room)
 
     let i = 1;
-    while(usersInChannel.some(e => e.name === 'Guest'+i)) {
+    while(usersInRoom.some(e => e.name === 'Guest'+i)) {
         i++
     }
 
@@ -44,6 +44,6 @@ const getUser = (id) => users.find((user) => user.id === id);
 
 const getAllUsers = () => users;
 
-const getUsersInChannel = (channel) => users.filter((user) => user.channel === channel);
+const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
-module.exports = { addUser, removeUser, getUser, getUsersInChannel, getAllUsers };
+module.exports = { addUser, removeUser, getUser, getUsersInRoom, getAllUsers };
