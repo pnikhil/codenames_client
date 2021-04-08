@@ -84,7 +84,7 @@ const Game = ({location}) => {
 
         if (game) {
             const {name, spymaster} = game;
-            socket = io(ENDPOINT);
+            socket = io(ENDPOINT, {transport: ['websocket']});
             socket.emit('join', {name, room, spymaster}, (response) => {
                 if (response.error) {
                     setError(true)
